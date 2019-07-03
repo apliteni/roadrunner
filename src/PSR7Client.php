@@ -94,7 +94,7 @@ class PSR7Client
         }
 
         foreach ($rawRequest['ctx']['headers'] as $name => $value) {
-            $request = $request->withHeader($name, $value);
+            $request = $request->withHeader((string) $name, $value);
         }
 
         if ($rawRequest['ctx']['parsed']) {
