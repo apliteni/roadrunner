@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Spiral Framework.
  *
@@ -32,16 +33,16 @@ final class Metrics implements MetricsInterface
     /**
      * Add collector value. Fallback to appropriate method of related collector.
      *
-     * @param string $collector
+     * @param string $name
      * @param float  $value
      * @param array  $labels
      *
      * @throws MetricException
      */
-    public function add(string $collector, float $value, array $labels = [])
+    public function add(string $name, float $value, array $labels = []): void
     {
         try {
-            $this->rpc->call('metrics.Add', compact('collector', 'value', 'labels'));
+            $this->rpc->call('metrics.Add', compact('name', 'value', 'labels'));
         } catch (RPCException $e) {
             throw new MetricException($e->getMessage(), $e->getCode(), $e);
         }
@@ -50,16 +51,16 @@ final class Metrics implements MetricsInterface
     /**
      * Subtract the collector value, only for gauge collector.
      *
-     * @param string $collector
+     * @param string $name
      * @param float  $value
      * @param array  $labels
      *
      * @throws MetricException
      */
-    public function sub(string $collector, float $value, array $labels = [])
+    public function sub(string $name, float $value, array $labels = []): void
     {
         try {
-            $this->rpc->call('metrics.Sub', compact('collector', 'value', 'labels'));
+            $this->rpc->call('metrics.Sub', compact('name', 'value', 'labels'));
         } catch (RPCException $e) {
             throw new MetricException($e->getMessage(), $e->getCode(), $e);
         }
@@ -68,16 +69,16 @@ final class Metrics implements MetricsInterface
     /**
      * Observe collector value, only for histogram and summary collectors.
      *
-     * @param string $collector
+     * @param string $name
      * @param float  $value
      * @param array  $labels
      *
      * @throws MetricException
      */
-    public function observe(string $collector, float $value, array $labels = [])
+    public function observe(string $name, float $value, array $labels = []): void
     {
         try {
-            $this->rpc->call('metrics.Observe', compact('collector', 'value', 'labels'));
+            $this->rpc->call('metrics.Observe', compact('name', 'value', 'labels'));
         } catch (RPCException $e) {
             throw new MetricException($e->getMessage(), $e->getCode(), $e);
         }
@@ -86,16 +87,16 @@ final class Metrics implements MetricsInterface
     /**
      * Set collector value, only for gauge collector.
      *
-     * @param string $collector
+     * @param string $name
      * @param float  $value
      * @param array  $labels
      *
      * @throws MetricException
      */
-    public function set(string $collector, float $value, array $labels = [])
+    public function set(string $name, float $value, array $labels = []): void
     {
         try {
-            $this->rpc->call('metrics.Set', compact('collector', 'value', 'labels'));
+            $this->rpc->call('metrics.Set', compact('name', 'value', 'labels'));
         } catch (RPCException $e) {
             throw new MetricException($e->getMessage(), $e->getCode(), $e);
         }

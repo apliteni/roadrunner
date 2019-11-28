@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Spiral Framework.
  *
@@ -13,5 +14,4 @@ use Spiral\Goridge\Exceptions\RPCException;
 
 class MetricException extends RPCException
 {
-
 }

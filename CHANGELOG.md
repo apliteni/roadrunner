@@ -1,6 +1,30 @@
 CHANGELOG
 =========
 
+v1.5.1 (22.10.2019)
+-------------------
+- bugfix: do not halt stop sequence in case of service error
+
+v1.5.0 (12.10.2019)
+-------------------
+- initial code style fixes by @ScullWM
+- added health service for better integration with Kubernetes by @awprice
+- added support for payloads in GET methods by @moeinpaki
+- dropped support of PHP 7.0 version (you can still use new server binary)
+
+v1.4.8 (06.09.2019)
+-------------------
+- bugfix in proxy IP resolution by @spudro228 
+- `rr get` can now skip binary download if version did not change by
+  @drefixs
+- bugfix in `rr init-config` and with linux binary download by
+  @Hunternnm
+- `$_SERVER['REQUEST_URI']` is now being set
+
+v1.4.7 (29.07.2019)
+-------------------
+- added support for H2C over TCP by @Alex-Bond
+
 v1.4.6 (01.07.2019)
 -------------------
 - Worker is not final (to allow mocking)

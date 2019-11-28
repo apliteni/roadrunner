@@ -1,6 +1,6 @@
-all:
-	@./build.sh
 build:
+	@./build.sh
+all:
 	@./build.sh all
 clean:
 	rm -rf rr
@@ -20,3 +20,7 @@ test:
 	go test -v -race -cover ./service/limit
 	go test -v -race -cover ./service/headers
 	go test -v -race -cover ./service/metrics
+	go test -v -race -cover ./service/health
+lint:
+	go fmt ./...
+	golint ./...

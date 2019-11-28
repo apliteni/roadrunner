@@ -11,7 +11,7 @@
 	<a href="https://discord.gg/TFeEmCs"><img src="https://img.shields.io/badge/discord-chat-magenta.svg"></a>
 </p>
 
-RoadRunner is an open source (MIT licensed) high-performance PHP application server, load balancer and process manager.
+RoadRunner is an open-source (MIT licensed) high-performance PHP application server, load balancer, and process manager.
 It supports running as a service with the ability to extend its functionality on a per-project basis. 
 
 RoadRunner includes PSR-7/PSR-17 compatible HTTP and HTTP/2 server and can be used to replace classic Nginx+FPM setup with much greater performance and flexibility.
@@ -23,16 +23,16 @@ RoadRunner includes PSR-7/PSR-17 compatible HTTP and HTTP/2 server and can be us
 
 Features:
 --------
-- production ready
+- production-ready
 - PSR-7 HTTP server (file uploads, error handling, static files, hot reload, middlewares, event listeners)
-- HTTPS and HTTP/2 support (including HTTP/2 Push)
+- HTTPS and HTTP/2 support (including HTTP/2 Push, H2C)
 - fully customizable server
 - flexible environment configuration
-- no external PHP dependencies, drop-in (based on [Goridge](https://github.com/spiral/goridge))
+- no external PHP dependencies (64bit version required), drop-in (based on [Goridge](https://github.com/spiral/goridge))
 - load balancer, process manager and task pipeline
 - frontend agnostic ([Queue](https://github.com/spiral/jobs), PSR-7, [GRPC](https://github.com/spiral/php-grpc), etc)
 - integrated metrics (Prometheus)
-- works over TCP, unix sockets and standard pipes
+- works over TCP, UNIX sockets and standard pipes
 - automatic worker replacement and safe PHP process destruction
 - worker create/allocate/destroy timeouts
 - max jobs per worker

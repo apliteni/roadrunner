@@ -1,4 +1,5 @@
 <?php
+
 /**
  * High-performance PHP process supervisor and load balancer written in Go
  *
@@ -113,7 +114,7 @@ class PSR7Client
      *
      * @param ResponseInterface $response
      */
-    public function respond(ResponseInterface $response)
+    public function respond(ResponseInterface $response): void
     {
         $this->httpClient->respond(
             $response->getStatusCode(),
@@ -132,6 +133,8 @@ class PSR7Client
     protected function configureServer(array $ctx): array
     {
         $server = $this->originalServer;
+
+        $server['REQUEST_URI'] = $ctx['uri'];
         $server['REQUEST_TIME'] = time();
         $server['REQUEST_TIME_FLOAT'] = microtime(true);
         $server['REMOTE_ADDR'] = $ctx['attributes']['ipAddress'] ?? $ctx['remoteAddr'] ?? '127.0.0.1';

@@ -18,7 +18,7 @@ metrics:
   collect:
     # metric name
     app_metric:
-      # type [gauge, counter, histogram, symnmary]
+      # type [gauge, counter, histogram, summary]
       type:    histogram
       
       # short description
@@ -57,6 +57,9 @@ http:
   http2:
     # enable HTTP/2, only with TSL
     enabled: true
+
+    # enable H2C on TCP connections
+    h2c: true
     
     # max transfer channels
     maxConcurrentStreams: 128
@@ -152,3 +155,8 @@ static:
 
   # list of extensions for forbid for serving.
   forbid: [".php", ".htaccess"]
+
+# health service configuration
+health:
+  # http host to serve health requests.
+  address: localhost:2113

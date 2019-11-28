@@ -197,12 +197,30 @@ class RRHelper
         }
 
         if (is_file($finalFile)) {
+            $version = RRHelper::getVersion();
+
+            $previousVersion = preg_match(
+                '#Version:.+(\d+\.\d+\.\d+)#',
+                (string)shell_exec($finalFile),
+                $matches
+            ) ? $matches[1] : "";
+
             $output->writeln('<error>RoadRunner binary file already exists!</error>');
             $helper = $this->getHelper('question');
-            $question = new ConfirmationQuestion('Do you want overwrite it? [Y/n] ');
 
-            if (!$helper->ask($input, $output, $question)) {
-                return;
+            if (version_compare($previousVersion, $version) === 0) {
+                $output->writeln(sprintf('<info>Current version: %s</info>', $previousVersion));
+                $question = new ConfirmationQuestion(
+                        sprintf('Skip update to the same version: %s ? [Y/n]', $version)
+                );
+                if ($helper->ask($input, $output, $question)) {
+                    return;
+                }
+            } else {
+                $question = new ConfirmationQuestion('Do you want overwrite it? [Y/n]');
+                if (!$helper->ask($input, $output, $question)) {
+                    return;
+                }
             }
         }
 
@@ -211,7 +229,7 @@ class RRHelper
         $progressBar = new ProgressBar($output);
         $progressBar->setFormat('verbose');
 
-        $zipFileName = tempnam('.', "rr_zip");
+        $zipFileName = 'rr_zip_'.random_int(0, 10000);
         if (RRHelper::getOSType() == 'linux') {
             $zipFileName .= '.tar.gz';
         }
@@ -283,7 +301,7 @@ class RRHelper
         }
 
         copy(
-            __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.rr.yaml',
+            __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.rr.yaml',
             $input->getOption('location') . DIRECTORY_SEPARATOR . '.rr.yaml'
         );
         $output->writeln('<info>Config file created!</info>');

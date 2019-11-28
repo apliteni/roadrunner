@@ -1,4 +1,5 @@
 <?php
+
 /**
  * High-performance PHP process supervisor and load balancer written in Go
  *
@@ -10,5 +11,4 @@ namespace Spiral\RoadRunner\Exception;
 
 class RoadRunnerException extends \Spiral\RoadRunner\Exceptions\RoadRunnerException
 {
-
 }
